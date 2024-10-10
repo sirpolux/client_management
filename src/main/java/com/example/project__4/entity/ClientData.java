@@ -7,7 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -15,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "client_date")
+@Table(name = "client_data")
 public class ClientData extends BaseEntity{
     @Column(name = "uid", nullable = false, unique = true)
     private String uid = UUID.randomUUID().toString();
@@ -25,4 +28,12 @@ public class ClientData extends BaseEntity{
     private String name;
     @Column(name="account_number")
     private String accountNumber;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false)
+    private Date updatedAt;
 }

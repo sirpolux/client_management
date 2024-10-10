@@ -27,6 +27,7 @@ public class User extends BaseEntity {
     private String phoneNumber;
     private String password;
     private Boolean emailVerified;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
     private Date createdAt;
