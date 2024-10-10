@@ -1,8 +1,8 @@
 package com.example.project__4.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +29,12 @@ public class ClientData extends BaseEntity{
     @Column(name="account_number")
     private String accountNumber;
 
+    @ManyToOne
+    @JoinColumn(name = "added_by")
+    @JsonIgnore
+    @JsonBackReference
+    private User addedBy;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
     private Date createdAt;
@@ -36,4 +42,6 @@ public class ClientData extends BaseEntity{
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
     private Date updatedAt;
+
+
 }
