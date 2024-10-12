@@ -28,4 +28,5 @@ public interface ClientDataRepository extends JpaRepository<ClientData, Long> {
     long countClientData(@Param("searchValue") String searchValue);
 
 
+
 }

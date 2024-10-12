@@ -28,6 +28,8 @@ public class ClientData extends BaseEntity{
     private String name;
     @Column(name="account_number")
     private String accountNumber;
+    @Column(name = "description")
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "added_by")
