@@ -1,8 +1,10 @@
 package com.example.project__4.entity;
 
 
+import com.example.project__4.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,9 +28,11 @@ public class User extends BaseEntity {
     private String name;
     private String email;
     private String phoneNumber;
-    private String password;
-    private Boolean emailVerified;
 
+    private String password;
+
+    private Boolean emailVerified;
+    private UserRole role=UserRole.ROLE_USER;
 
     @OneToMany
     @JoinColumn(name = "client_data")
