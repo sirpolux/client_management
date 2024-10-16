@@ -21,13 +21,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final  Utility utility;
-    @Override
-    public User createUser(UserRequestDto userRequestDto) {
-       if(userExits(userRequestDto.getEmail())){
-           throw new UserAlredyExistsException("A user is already registered with this email address ");
-       }
-        return userRepository.save(modelMapper.map(userRequestDto, User.class));
-    }
+
 
     @Override
     public User fetchUser(AuthenticationDto authenticationDto) {
@@ -37,8 +31,8 @@ public class UserServiceImpl implements UserService {
         return (User) utility.unwrapOptional(userRepository.findByEmail(authenticationDto.getEmail()), "user");
 
     }
-
-    private boolean userExits(String email){
+    @Override
+    public boolean userExits(String email){
         Optional<User> user = userRepository.findByEmail(email);
         return user.isPresent();
     }

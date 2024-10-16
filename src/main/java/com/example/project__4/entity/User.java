@@ -4,10 +4,7 @@ package com.example.project__4.entity;
 import com.example.project__4.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,6 +23,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "users")
+@Builder
 public class User extends BaseEntity implements UserDetails {
     private String name;
     private String email;
