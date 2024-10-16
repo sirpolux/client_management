@@ -1,6 +1,5 @@
 package com.example.project__4.controller;
 
-
 import com.example.project__4.dto.request.AuthenticationDto;
 import com.example.project__4.dto.response.LoginResponse;
 import com.example.project__4.utils.ResponseWrapper;
@@ -24,7 +23,8 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.OK)
-    public  ResponseWrapper<String> register(){
-        return  new ResponseWrapper<>(true, "Connection established");
+    public  String register(){
+        //return  new ResponseWrapper<>(true, "Connection established");
+        return  "Connection established";
     }
 }

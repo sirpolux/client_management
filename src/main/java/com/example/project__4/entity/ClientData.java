@@ -32,10 +32,9 @@ public class ClientData extends BaseEntity{
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "added_by")
+    @JoinColumn(name = "user_id")
     @JsonIgnore
-    @JsonBackReference
-    private User addedBy;
+    private User user;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
@@ -44,6 +43,5 @@ public class ClientData extends BaseEntity{
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
     private Date updatedAt;
-
 
 }

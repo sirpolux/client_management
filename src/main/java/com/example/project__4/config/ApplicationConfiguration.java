@@ -18,8 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfiguration {
-    private final UserService userService;
     private final UserRepository userRepository;
+
     @Bean
     public ModelMapper modelMapper(){
         return new ModelMapper();

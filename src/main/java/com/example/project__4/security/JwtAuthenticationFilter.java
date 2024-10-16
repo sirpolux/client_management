@@ -1,5 +1,6 @@
-package com.example.project__4.config;
+package com.example.project__4.security;
 
+import com.example.project__4.config.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

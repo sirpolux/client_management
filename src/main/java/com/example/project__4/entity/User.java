@@ -3,9 +3,6 @@ package com.example.project__4.entity;
 
 import com.example.project__4.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,8 +13,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -39,11 +36,9 @@ public class User extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role=UserRole.USER;
 
-    @OneToMany
-    @JoinColumn(name = "client_data")
     @JsonIgnore
-    @JsonManagedReference
-    private List<ClientData> clientData;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<ClientData> clientData = new ArrayList<>();
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)

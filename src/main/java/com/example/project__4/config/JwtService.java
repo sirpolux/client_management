@@ -21,7 +21,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtService {
     @Value("${security.token}")
-    private final String SECRET_KEY;
+    private String SECRET_KEY;
 
 
     public String extractUsername(String jwtToken){

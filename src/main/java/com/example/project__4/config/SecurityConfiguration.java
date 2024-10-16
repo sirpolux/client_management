@@ -1,8 +1,8 @@
 package com.example.project__4.config;
 
 
+import com.example.project__4.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
