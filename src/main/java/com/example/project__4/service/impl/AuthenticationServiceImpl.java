@@ -12,11 +12,15 @@ import com.example.project__4.exception.UserAlredyExistsException;
 import com.example.project__4.repository.UserRepository;
 import com.example.project__4.service.AuthenticationService;
 import com.example.project__4.service.UserService;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 
 @Service
@@ -48,12 +52,35 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User saveduser = userRepository.save(user);
 
         var jwtToken = jwtService.generateToken(user);
-        return SignUpResponse.
-        return null;
+        Date expiresAt = jwtService.extractClaims(jwtToken, Claims::getExpiration);
+        return SignUpResponse
+                .builder()
+                .email(saveduser.getEmail())
+                .token(jwtToken)
+                .expiresAt(expiresAt)
+                .build();
     }
 
     @Override
     public AuthenticationResponse authenticate(AuthenticationDto authenticationDto) {
-        return null;
+        if(!userService.userExits(authenticationDto.getEmail())){
+            throw new InvalidUserCredentialException("Invalid username or password");
+        }
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        authenticationDto.getEmail(),
+                        authenticationDto.getPassword()
+                )
+        );
+
+        var user = userService.fetchUser(authenticationDto);
+        var token = jwtService.generateToken(user);
+        return  AuthenticationResponse
+                .builder()
+                .email(user.getEmail())
+                .expiresAt(jwtService.extractClaims(token, Claims::getExpiration))
+                .token(token)
+                .build();
+
     }
 }
