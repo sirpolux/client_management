@@ -3,9 +3,13 @@ package com.example.project__4.service.impl;
 import com.example.project__4.dto.request.AuthenticationDto;
 import com.example.project__4.dto.request.UserRequestDto;
 import com.example.project__4.entity.User;
+import com.example.project__4.exception.InvalidUserCredentialException;
+import com.example.project__4.exception.UserAlredyExistsException;
 import com.example.project__4.repository.UserRepository;
 import com.example.project__4.service.UserService;
+import com.example.project__4.utils.Utility;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,15 +19,23 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
+    private final  Utility utility;
     @Override
     public User createUser(UserRequestDto userRequestDto) {
-       // if(userExits(userRequestDto.))
-        return null;
+       if(userExits(userRequestDto.getEmail())){
+           throw new UserAlredyExistsException("A user is already registered with this email address ");
+       }
+        return userRepository.save(modelMapper.map(userRequestDto, User.class));
     }
 
     @Override
     public User fetchUser(AuthenticationDto authenticationDto) {
-        return null;
+        if(!userExits(authenticationDto.getEmail())){
+            throw new InvalidUserCredentialException("User with  credential not found! Invalid username or password");
+        }
+        return (User) utility.unwrapOptional(userRepository.findByEmail(authenticationDto.getEmail()), "user");
+
     }
 
     private boolean userExits(String email){
