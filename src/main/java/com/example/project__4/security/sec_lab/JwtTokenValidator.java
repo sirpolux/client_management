@@ -1,4 +1,4 @@
-package com.example.project__4.security;
+package com.example.project__4.security.sec_lab;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

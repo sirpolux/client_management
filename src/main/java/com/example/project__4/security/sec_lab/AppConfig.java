@@ -1,4 +1,4 @@
-package com.example.project__4.security;
+package com.example.project__4.security.sec_lab;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;

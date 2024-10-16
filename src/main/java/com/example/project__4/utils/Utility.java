@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Configuration
 public class Utility {
+
     public Object unwrapOptional(Optional<?> entity , String entityName){
         if (entity.isPresent()){
             return entity.get();

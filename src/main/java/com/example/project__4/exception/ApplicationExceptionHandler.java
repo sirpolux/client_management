@@ -18,4 +18,19 @@ public class ApplicationExceptionHandler {
         List<String> errors = List.of(ex.getMessage());
         return new ResponseEntity<>(new ErrorResponse(errors, ErrorCodes.ENTITY_NOT_FOUND_ERROR),HttpStatus.BAD_REQUEST);
     }
+
+
+    @ExceptionHandler(InvalidUserCredentialException.class)
+    public  final  ResponseEntity<Object> handleInvalidUserCredentialException(InvalidUserCredentialException ex){
+        List<String> errors = List.of(ex.getMessage());
+        return new ResponseEntity<>(new ErrorResponse(errors, ErrorCodes.INVALID_LOGIN_CREDENTIALS),HttpStatus.BAD_REQUEST);
+
+    }
+
+    @ExceptionHandler(UserAlredyExistsException.class)
+    public  final  ResponseEntity<Object> handleUserAlredyExistsException(UserAlredyExistsException ex){
+        List<String> errors = List.of(ex.getMessage());
+        return new ResponseEntity<>(new ErrorResponse(errors, ErrorCodes.USER_ALREADY_EXISTS),HttpStatus.BAD_REQUEST);
+
+    }
 }
