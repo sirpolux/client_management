@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class ClientDataDTO {
+public class ClientDataResponse {
     private  String uid;
     private String customerId;
     private String name;

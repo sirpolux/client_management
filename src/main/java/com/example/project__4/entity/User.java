@@ -11,10 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @AllArgsConstructor
@@ -25,6 +22,8 @@ import java.util.List;
 @Table(name = "users")
 @Builder
 public class User extends BaseEntity implements UserDetails {
+    @Column(name = "uid", nullable = false, unique = true)
+    private String uid = UUID.randomUUID().toString();
     private String name;
     private String email;
     private String phoneNumber;
