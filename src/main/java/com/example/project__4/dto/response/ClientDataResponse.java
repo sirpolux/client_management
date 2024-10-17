@@ -13,4 +13,5 @@ public class ClientDataResponse {
     private String customerId;
     private String name;
     private String accountNumber;
+    private String description;
 }

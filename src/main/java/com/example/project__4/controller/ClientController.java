@@ -23,7 +23,7 @@ public class ClientController {
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper<PaginatedResponse<ClientDataResponse>> allClients(@RequestParam PaginationDTO paginationDTO){
+    public ResponseWrapper<PaginatedResponse<ClientDataResponse>> allClients( @Valid @ModelAttribute PaginationDTO paginationDTO){
         return  new ResponseWrapper<>(
                 true,
                 "Client data retrieved",
@@ -33,7 +33,7 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper<ClientDataResponse> saveClient(@RequestBody @Valid ClientDataRequestDTO clientDataDto){
+    public ResponseWrapper<ClientDataResponse> saveClient(@Valid @RequestBody ClientDataRequestDTO clientDataDto){
         return new ResponseWrapper<>(true,
                 "Client Data Successfully added",
                 clientService.saveClient(clientDataDto));
@@ -51,7 +51,7 @@ public class ClientController {
 
     @PutMapping("/update/{uid}")
     @ResponseStatus(HttpStatus.OK)
-    public  ResponseWrapper<ClientDataResponse> updateClient(ClientDataRequestDTO dto, String uid){
+    public  ResponseWrapper<ClientDataResponse> updateClient(@RequestBody ClientDataRequestDTO dto, String uid){
         return  new ResponseWrapper<>(
                 true,
                 "Client data updated",

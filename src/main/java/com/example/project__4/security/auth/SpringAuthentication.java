@@ -26,13 +26,9 @@ public class SpringAuthentication implements AuthenticationContract {
     @Override
     public User getAuthenticatedUser(){
         Authentication authentication = getAuthentication();
-
         if (authentication instanceof AnonymousAuthenticationToken) {
             throw new CustomRuntimeException(HttpStatus.FORBIDDEN, "Unauthorized", ErrorCodes.BAD_REQUEST);
         }
-        String currentUserUid = authentication.getName();
-        User user = (userRepository.findByUid(currentUserUid)).get();
-
-        return user;
+        return (User) authentication.getPrincipal();
     }
 }
