@@ -32,7 +32,7 @@ public class ClientServiceImpl implements ClientService {
     public PaginatedResponse<ClientDataResponse> allClients(PaginationDTO paginationDTO) {
         List<ClientData> clientList = clientDataRepository.searchClientData(paginationDTO.getSearchFilter(), paginationDTO.getPaginationCriteria(null));
         int totalSize =(int) clientDataRepository.countClientData(paginationDTO.getSearchFilter());
-        int pages = (int)(totalSize/ paginationDTO.getSize());
+        int pages = (totalSize/ paginationDTO.getSize());
         return new PaginatedResponse<>(paginationDTO.getPage(),
                         totalSize,
                         pages,

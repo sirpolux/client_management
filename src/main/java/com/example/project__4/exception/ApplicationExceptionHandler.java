@@ -52,4 +52,9 @@ public class ApplicationExceptionHandler {
         return  new ResponseEntity<>(errors ,HttpStatus.BAD_REQUEST);
     }
 
+
+    @ExceptionHandler(CustomRuntimeException.class)
+    public  final  ResponseEntity<Object> handleCustomRuntimeException(CustomRuntimeException ex){
+        return  new ResponseEntity<>( new ErrorResponse(List.of(ex.getMessage()), ErrorCodes.BAD_REQUEST),HttpStatus.BAD_REQUEST);
+    }
 }
